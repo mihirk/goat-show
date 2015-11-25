@@ -31,7 +31,7 @@ class Controller(object):
     def output(self):
         schedule = self.schedule.get()
         map(lambda day: pprint("{} can perform on day {}".format(schedule[day], day)),
-            filter(lambda day: bool(schedule[day]), sorted(schedule.keys())))
+            filter(lambda day: bool(schedule[day]), sorted(schedule.keys(), key=lambda x: float(x))))
 
 
 Controller([{"type": "Goat", "path": "../goats.json"}], 10) \
