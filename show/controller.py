@@ -1,6 +1,7 @@
 import json
 
 from show.animals import Animals
+
 from show.schedule import Schedule
 from pprint import pprint
 
@@ -25,7 +26,14 @@ class Controller(object):
 
     def run(self):
         map(self.schedule.schedule_with, self.animals)
-        return self.schedule.get()
+        return self
+
+    def output(self):
+        schedule = self.schedule.get()
+        map(lambda day: pprint("{} can perform on day {}".format(schedule[day], day)),
+            filter(lambda day: bool(schedule[day]), schedule.keys()))
 
 
-print Controller([{"type": "Goat", "path": "../goats.json"}], 10).run()
+Controller([{"type": "Goat", "path": "../goats.json"}], 10) \
+    .run() \
+    .output()
